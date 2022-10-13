@@ -1,78 +1,16 @@
-﻿var book = new Book("My book title");
+﻿using ProiectSP;
 
-book.createNewParagraph("Parag");
-book.createNewTable("Table");
-book.createNewImage("Image");
+var book = new Book("My book title");
+Author labMice = new Author("Lab Mice, Subject 1");
 
-Console.WriteLine(book);
+book.AddAuthor(labMice);
+int indexCh1 = book.CreateChapter("First chapter, cool ..");
+Chapter chapter1 = book.GetChapter(indexCh1);
+int indexSbCh1 = chapter1.CreateSubChapter("Hey, here is a subchapter");
+SubChapter subChapter1 = chapter1.GetSubChapter(indexSbCh1);
 
-public class Book
-{
-    public string Title { get; set; } 
-    public List<BookItem> BookItems { get; set; }
+subChapter1.CreateNewParagraph("A loong time ago existed a paragraph");
+subChapter1.CreateNewTable("Here is a table record of that happening");
+subChapter1.CreateNewImage("Also a image with the new paragraph:");
 
-    public Book(string title)
-    {
-        Title = title;
-        BookItems = new List<BookItem>();
-    }
-
-    public void createNewParagraph(string content)
-    {
-        BookItems.Add(new Paragraph(content));
-    }
-    public void createNewImage(string content)
-    {
-        BookItems.Add(new Image(content));
-    }
-    public void createNewTable(string content)
-    {
-        BookItems.Add(new Table(content));
-    }
-    public override string ToString()
-    {
-        return $"Titlu: {Title} \n{string.Join("\n", BookItems)}";
-    }
-}
-
-public class BookItem
-{
-    public string Content { get; set; }
-
-    public BookItem(string content)
-    {
-        Content = content;
-    }
-
-    public override string ToString()
-    {
-        return Content;
-    }
-}
-
-public class Paragraph : BookItem
-{
-    public Paragraph(string content) : base(content)
-    {
-    }
-}
-
-public class Image : BookItem
-{
-    public Image(string content) : base(content)
-    {
-    }
-
-    public override string ToString()
-    {
-        return Content + "* rendering *";
-    }
-}
-
-public class Table : BookItem
-{
-    public Table(string content) : base(content)
-    {
-    }
-}
-
+book.Print();
