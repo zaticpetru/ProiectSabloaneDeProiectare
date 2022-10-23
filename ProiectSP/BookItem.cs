@@ -2,7 +2,7 @@
 {
     public abstract class BookItem
     {
-        public string Content { get; set; }
+        public string Content { get; }
 
         public BookItem(string content)
         {

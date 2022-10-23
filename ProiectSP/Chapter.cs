@@ -1,25 +1,38 @@
 ﻿namespace ProiectSP
 {
-    public class Chapter
+    public class Chapter : GenericItem<SubChapter>
     {
         public string Name { get; set; }
-        public List<SubChapter> SubChapters { get; set; }
+        public List<SubChapter> Items { get; }
+
         public Chapter(string name)
         {
             Name = name;
-            SubChapters = new List<SubChapter>();
+            Items = new List<SubChapter>();
         }
-        public int CreateSubChapter(string name)
+
+        public SubChapter GetItem(int index) => Items[index];
+
+        public int AddItem(SubChapter item)
         {
-            var subChapter = new SubChapter(name);
-            SubChapters.Add(subChapter);
-            return SubChapters.IndexOf(subChapter);
+            Items.Add(item);
+            return Items.IndexOf(item);
         }
-        public SubChapter GetSubChapter(int index) => SubChapters[index];
+
+        public bool RemoveItem(SubChapter item) => Items.Remove(item);
         public void Print()
         {
             Console.WriteLine($"Titlu capitol: {Name}\n");
-            SubChapters.ForEach(item => item.Print());
+            Items.ForEach(item => item.Print());
         }
+    }
+    
+    interface GenericItem<T>
+    {
+        List<T> Items { get; }
+        T GetItem(int index);
+        int AddItem(T item);
+        bool RemoveItem(T item);
+        void Print();
     }
 }
