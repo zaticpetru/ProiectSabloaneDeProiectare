@@ -1,32 +1,24 @@
 ﻿namespace ProiectSP
 {
-    public class Book
+    public class Book : IGenericItem<Chapter>
     {
         public string Title { get; set; }
-        public List<Chapter> Chapters { get; set; }
+        public List<Chapter> Items { get; }
         public List<Author> Authors { get; set; }
 
         public Book(string title)
         {
             Title = title;
-            Chapters = new List<Chapter>();
+            Items = new List<Chapter>();
             Authors = new List<Author>();
         }
 
-        public int CreateChapter(string name)
-        {
-            var chapter = new Chapter(name);
-            Chapters.Add(chapter);
-            return Chapters.IndexOf(chapter);
-        }
 
         public int AddAuthor(Author author)
         {
             Authors.Add(author);
             return Authors.IndexOf(author);
         }
-
-        public Chapter GetChapter(int index) => Chapters[index];
 
         public void Print()
         {
@@ -40,7 +32,7 @@
             {
                 Console.WriteLine("Carte fara autor");
             }
-            Chapters.ForEach(item => item.Print());
+            Items.ForEach(item => item.Print());
         }
     }
 }

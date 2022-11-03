@@ -3,6 +3,7 @@
     public abstract class BookItem
     {
         public string Content { get; }
+        public IAlignStrategy? AlignStrategy { get; set; }
 
         public BookItem(string content)
         {
