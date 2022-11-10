@@ -2,25 +2,26 @@
 
 namespace Models
 {
-    public class SubChapter : IGenericItem<BookItem>, IVisitee
+    public class Section : IGenericItem<SubChapter>, IVisitee
     {
         public string Name { get; set; }
-        public List<BookItem> Items { get; }
+        public List<SubChapter> Items { get; }
 
-        public SubChapter(string name)
+        public Section(string name)
         {
             Name = name;
-            Items = new List<BookItem>();
+            Items = new List<SubChapter>();
         }
+
         public void Print()
         {
-            Console.WriteLine($"Titlu subcapitol: {Name}\n");
+            Console.WriteLine($"Titlu capitol: {Name}\n");
             Items.ForEach(item => item.Print());
         }
 
         public void Accept(IVisitor visitor)
         {
-            visitor.VisitSubChapter(this);
+            visitor.VisitSection(this);
             Items.ForEach(item =>
             {
                 if (item is IVisitee visitee)

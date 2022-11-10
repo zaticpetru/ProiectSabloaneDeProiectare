@@ -1,11 +1,13 @@
-﻿namespace Models
+﻿using Models.Interfaces;
+
+namespace Models
 {
     public interface IPicture
     {
         string Url { get; set; }
         int Dimension { get; set; }
     }
-    public class Image : BookItem, IPicture
+    public class Image : BookItem, IPicture, IVisitee
     {
         public string Url { get; set; }
         public int Dimension { get; set; } = 0;
@@ -16,6 +18,11 @@
             ContentImg = ImageLoaderFactory.Create(url);
         }
         public override void Print() => Console.WriteLine(Content + " * rendering *");
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.VisitImage(this);
+        }
     }
 
     public class ImageProxy
@@ -46,12 +53,12 @@
         }
     }
 
-    public interface ImageLoader
+    public interface IImageLoader
     {
         public ImageContent Load(string url);
     }
 
-    public class JPGImageLoader : ImageLoader
+    public class JPGImageLoader : IImageLoader
     {
         public ImageContent Load(string url)
         {
@@ -59,7 +66,7 @@
         }
     }
 
-    public class BMPImageLoader : ImageLoader
+    public class BMPImageLoader : IImageLoader
     {
         public ImageContent Load(string url)
         {

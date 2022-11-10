@@ -1,14 +1,15 @@
 ﻿using Models;
+using Models.Interfaces;
 using Services;
 
 var book = new Book("My book title");
-var bookAsGenericItem = book as IGenericItem<Chapter>;
+var bookAsGenericItem = book as IGenericItem<Section>;
 Author labMice = new Author("Lab Mice, Subject 1");
 
 book.AddAuthor(labMice);
 
-int indexCh1 = bookAsGenericItem.AddItem(new Chapter("First chapter, cool .."));
-IGenericItem<SubChapter> chapter1 = bookAsGenericItem.GetItem(indexCh1);
+int indexSection1 = bookAsGenericItem.AddItem(new Section("First chapter, cool .."));
+IGenericItem<SubChapter> chapter1 = bookAsGenericItem.GetItem(indexSection1);
 int indexSbCh1 = chapter1.AddItem(new SubChapter("Hey, here is a subchapter"));
 IGenericItem<BookItem> subChapter1 = chapter1.GetItem(indexSbCh1);
 
@@ -23,3 +24,9 @@ subChapter1.GetItem(prg2).AlignStrategy = new AlignLeft();
 subChapter1.GetItem(prg3).AlignStrategy = new AlignCenter();
 
 book.Print();
+Console.WriteLine("-----------------------------------------------------------");
+
+var bookStats = new BookStatistics();
+book.Accept(bookStats);
+
+bookStats.PrintStatistics();

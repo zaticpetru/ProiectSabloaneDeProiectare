@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using Models.Interfaces;
+
+namespace Models
 {
     public abstract class BookItem
     {

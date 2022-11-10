@@ -1,15 +1,17 @@
-﻿namespace Models
+﻿using Models.Interfaces;
+
+namespace Models
 {
-    public class Book : IGenericItem<Chapter>
+    public class Book : IGenericItem<Section>, IVisitee
     {
         public string Title { get; set; }
-        public List<Chapter> Items { get; }
+        public List<Section> Items { get; }
         public List<Author> Authors { get; set; }
 
         public Book(string title)
         {
             Title = title;
-            Items = new List<Chapter>();
+            Items = new List<Section>();
             Authors = new List<Author>();
         }
 
@@ -33,6 +35,18 @@
                 Console.WriteLine("Carte fara autor");
             }
             Items.ForEach(item => item.Print());
+        }
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.VisitBook(this);
+            Items.ForEach(item =>
+            {
+                if(item is IVisitee visitee)
+                {
+                    visitee.Accept(visitor);
+                }
+            });
         }
     }
 }
