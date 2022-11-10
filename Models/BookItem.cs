@@ -1,4 +1,4 @@
-﻿namespace ProiectSP
+﻿namespace Models
 {
     public abstract class BookItem
     {

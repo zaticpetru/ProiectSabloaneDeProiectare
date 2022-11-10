@@ -1,4 +1,4 @@
-﻿namespace ProiectSP
+﻿namespace Models
 {
     public class Table : BookItem
     {

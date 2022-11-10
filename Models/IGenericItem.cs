@@ -1,6 +1,6 @@
-﻿namespace ProiectSP
+﻿namespace Models
 {
-    interface IGenericItem<T>
+    public interface IGenericItem<T>
     {
         List<T> Items { get; }
         T GetItem(int index) => Items[index];
