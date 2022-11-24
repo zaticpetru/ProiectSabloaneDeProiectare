@@ -1,11 +1,22 @@
 ﻿var firma = new Firma("UVT");
-var departament = new Departament("DevOps");
+var departamentDevOps = new Departament("DevOps");
 
-departament.AddAngajat(new Manager("Jhon", 3500));
-departament.AddAngajat(new Programator("Smith", 3150));
-departament.AddAngajat(new Tester("Bob", 3000));
+departamentDevOps.AddAngajat(new Manager("Jhon", 3500));
+departamentDevOps.AddAngajat(new Programator("Smith", 3150));
+departamentDevOps.AddAngajat(new Tester("Bob", 3000));
 
-firma.AddDepartament(departament);
+var departamentFrontend = new Departament("Frontend");
+departamentFrontend.AddAngajat(new Manager("Mikael", 3650));
+departamentFrontend.AddAngajat(new Programator("Katie", 2000));
+
+var departamentIntershipFrontend = new Departament("IntershipFrontend");
+departamentIntershipFrontend.AddAngajat(new Programator("Teacher", 9090));
+departamentIntershipFrontend.AddAngajat(new Programator("Guru", 9099));
+
+departamentFrontend.AddSubDepartament(departamentIntershipFrontend);
+
+firma.AddDepartament(departamentFrontend);
+firma.AddDepartament(departamentDevOps);
 
 var statisticiSalariu = new StatisticiSalariu();
 firma.Accept(statisticiSalariu);

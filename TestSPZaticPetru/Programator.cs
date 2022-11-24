@@ -10,8 +10,5 @@
         Salariu = salariu;
     }
 
-    public void Accept(IVisitor visitor)
-    {
-        visitor.VisitProgramator(this);
-    }
+    public void Accept(IVisitor visitor) => visitor.VisitProgramator(this);
 }
