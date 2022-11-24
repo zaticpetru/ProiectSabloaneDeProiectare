@@ -1,5 +1,6 @@
 ﻿public class Departament : IVisitee
 {
+    public Departament? ParentDepatament { get; set; }
     public List<Departament> SubDepartamente { get; private set; }
     public List<IAngajat> Angajati { get; private set; }
     public string Nume { get; private set; }
@@ -13,6 +14,7 @@
 
     public int AddSubDepartament(Departament departament)
     {
+        departament.ParentDepatament = this;
         SubDepartamente.Add(departament);
         return SubDepartamente.IndexOf(departament);
     }

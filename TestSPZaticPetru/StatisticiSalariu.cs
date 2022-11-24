@@ -14,8 +14,17 @@
     public void VisitFirma(Firma firma) =>
         Console.WriteLine("Visitam firma: " + firma.Nume);
 
-    public void VisitDepartament(Departament departament) =>
-        Console.WriteLine("Visitam departamentul: " + departament.Nume);
+    public void VisitDepartament(Departament departament)
+    {
+        if(departament.ParentDepatament != null)
+        {
+            Console.Write("Visitam subdepartamentul lui: " + departament.ParentDepatament.Nume + ", dep: ");
+        } else
+        {
+            Console.Write("Visitam departamentul: ");
+        }
+        Console.WriteLine(departament.Nume);
+    }
 
     public void VisitManager(Manager manager)
     {
